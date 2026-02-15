@@ -1,0 +1,337 @@
+                 count          mean           std           min           max
+fertility        217.0  2.412469e+00  1.220435e+00  6.800000e-01  6.255000e+00
+gdp              207.0  4.359202e+11  1.961520e+12  4.511685e+07  2.144339e+13
+gdp_pc           208.0  1.781140e+04  2.582606e+04  2.536916e+02  2.139370e+05
+health_exp       191.0  6.883157e+00  3.284450e+00  1.817682e+00  2.308817e+01
+life_expectancy  217.0  7.310802e+01  7.942539e+00  1.881800e+01  8.574600e+01
+                     Country  life_expectancy  fertility
+37  Central African Republic           18.818      6.023
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:        life_expectancy   R-squared:                       0.633
+Model:                            OLS   Adj. R-squared:                  0.631
+Method:                 Least Squares   F-statistic:                     370.3
+Date:                Sun, 15 Feb 2026   Prob (F-statistic):           1.19e-48
+Time:                        12:30:54   Log-Likelihood:                -648.42
+No. Observations:                 217   AIC:                             1301.
+Df Residuals:                     215   BIC:                             1308.
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const         85.5961      0.727    117.751      0.000      84.163      87.029
+fertility     -5.1765      0.269    -19.244      0.000      -5.707      -4.646
+==============================================================================
+Omnibus:                      123.224   Durbin-Watson:                   1.979
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             1570.558
+Skew:                          -1.879   Prob(JB):                         0.00
+Kurtosis:                      15.632   Cond. No.                         6.67
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+R2 (ESS/TSS) = 0.6326763409427306
+R2 (1-RSS/TSS) = 0.6326763409427305
+
+--- option 1: descriptives
+         ychapeau  ychapeau_manually
+count  217.000000         217.000000
+mean    73.108020          73.108020
+std      6.317571           6.317571
+min     53.217189          53.217189
+25%     69.212550          69.212550
+50%     75.507164          75.507164
+75%     77.753762          77.753762
+max     82.076133          82.076133
+
+--- option 2: correlation (should be ~1) ---
+0.9999999999999999
+
+--- option 3: equality check with tolerance ---
+verif
+1    217
+Name: count, dtype: int64
+
+--- Residuals: mean should be ~ 0 ---
+count    2.170000e+02
+mean     1.928616e-14
+std      4.813753e+00
+min     -3.560014e+01
+25%     -2.670056e+00
+50%      7.629796e-02
+75%      3.437944e+00
+max      1.206391e+01
+Name: uchapeau, dtype: float64
+
+--- residual check (corr should be ~ 1) ---
+1.0
+
+--- Breusch-Pagan test (Stata: hettest) ---
+LM statistic = 10.066553912394532
+LM p-value   = 0.001509851693438484
+F statistic  = 10.458962202990422
+F p-value    = 0.00141288632367118
+
+--- Regression with robust SE (Stata: robust) ---
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:        life_expectancy   R-squared:                       0.633
+Model:                            OLS   Adj. R-squared:                  0.631
+Method:                 Least Squares   F-statistic:                     126.4
+Date:                Sun, 15 Feb 2026   Prob (F-statistic):           2.28e-23
+Time:                        12:30:54   Log-Likelihood:                -648.42
+No. Observations:                 217   AIC:                             1301.
+Df Residuals:                     215   BIC:                             1308.
+Df Model:                           1                                         
+Covariance Type:                  HC1                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const         85.5961      0.995     85.991      0.000      83.634      87.558
+fertility     -5.1765      0.460    -11.243      0.000      -6.084      -4.269
+==============================================================================
+Omnibus:                      123.224   Durbin-Watson:                   1.979
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             1570.558
+Skew:                          -1.879   Prob(JB):                         0.00
+Kurtosis:                      15.632   Cond. No.                         6.67
+==============================================================================
+
+Notes:
+[1] Standard Errors are heteroscedasticity robust (HC1)
+df = 215
+
+--- Test H0: beta = -6 (robust) ---
+b_hat = -5.176492100220144
+robust SE = 0.46042668310652135
+t-stat = 1.7885755322076646
+p-value = 0.07509114396210959
+df =                    Country  year  ...  health_exp  life_expectancy
+0              Afghanistan  2022  ...   23.088169        65.617000
+1                  Albania  2022  ...    6.193681        78.769000
+2                  Algeria  2022  ...    3.623043        76.129000
+3           American Samoa  2022  ...         NaN        72.752000
+4                  Andorra  2022  ...    7.536788        84.016000
+..                     ...   ...  ...         ...              ...
+212  Virgin Islands (U.S.)  2022  ...         NaN        80.319512
+213     West Bank and Gaza  2022  ...    9.733360        76.662000
+214            Yemen, Rep.  2022  ...    6.186667        67.952000
+215                 Zambia  2022  ...    5.255923        65.279000
+216               Zimbabwe  2022  ...    3.628807        62.360000
+
+[217 rows x 7 columns]
+
+--- Critical values ---
+z_0.975 = 1.959963984540054
+t_0.975 (df) = 1.971059122133646
+
+--- 95% CI for beta (robust) ---
+[ -6.08402031403099 , -4.268963886409297 ]
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:        life_expectancy   R-squared:                       0.702
+Model:                            OLS   Adj. R-squared:                  0.697
+Method:                 Least Squares   F-statistic:                     144.6
+Date:                Sun, 15 Feb 2026   Prob (F-statistic):           3.69e-48
+Time:                        12:30:54   Log-Likelihood:                -543.97
+No. Observations:                 188   AIC:                             1096.
+Df Residuals:                     184   BIC:                             1109.
+Df Model:                           3                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const         82.4764      1.194     69.062      0.000      80.120      84.833
+fertility     -4.4002      0.288    -15.275      0.000      -4.969      -3.832
+health_exp    -0.0657      0.100     -0.655      0.513      -0.264       0.132
+gdp_pc      9.326e-05   1.46e-05      6.408      0.000    6.45e-05       0.000
+==============================================================================
+Omnibus:                      170.922   Durbin-Watson:                   1.894
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             4976.310
+Skew:                          -3.173   Prob(JB):                         0.00
+Kurtosis:                      27.393   Cond. No.                     1.09e+05
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 1.09e+05. This might indicate that there are
+strong multicollinearity or other numerical problems.
+
+R² = 0.7021573136605028
+Adjusted R² = 0.6973011829049676
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:        life_expectancy   R-squared:                       0.702
+Model:                            OLS   Adj. R-squared:                  0.697
+Method:                 Least Squares   F-statistic:                     144.6
+Date:                Sun, 15 Feb 2026   Prob (F-statistic):           3.69e-48
+Time:                        12:30:54   Log-Likelihood:                -543.97
+No. Observations:                 188   AIC:                             1096.
+Df Residuals:                     184   BIC:                             1109.
+Df Model:                           3                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const         82.4764      1.194     69.062      0.000      80.120      84.833
+fertility     -4.4002      0.288    -15.275      0.000      -4.969      -3.832
+health_exp    -0.0657      0.100     -0.655      0.513      -0.264       0.132
+gdp_pc      9.326e-05   1.46e-05      6.408      0.000    6.45e-05       0.000
+==============================================================================
+Omnibus:                      170.922   Durbin-Watson:                   1.894
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             4976.310
+Skew:                          -3.173   Prob(JB):                         0.00
+Kurtosis:                      27.393   Cond. No.                     1.09e+05
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 1.09e+05. This might indicate that there are
+strong multicollinearity or other numerical problems.
+
+--- Breusch–Pagan test (Stata: hettest) ---
+LM statistic = 14.085899186364877
+LM p-value   = 0.0027905305102994406
+F statistic  = 4.967596911666359
+F p-value    = 0.0024440296579695897
+
+--- Multiple regression with robust SE (Stata: robust) ---
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:        life_expectancy   R-squared:                       0.702
+Model:                            OLS   Adj. R-squared:                  0.697
+Method:                 Least Squares   F-statistic:                     93.57
+Date:                Sun, 15 Feb 2026   Prob (F-statistic):           8.15e-37
+Time:                        12:30:54   Log-Likelihood:                -543.97
+No. Observations:                 188   AIC:                             1096.
+Df Residuals:                     184   BIC:                             1109.
+Df Model:                           3                                         
+Covariance Type:                  HC1                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const         82.4764      2.120     38.911      0.000      78.295      86.658
+fertility     -4.4002      0.588     -7.478      0.000      -5.561      -3.239
+health_exp    -0.0657      0.135     -0.485      0.628      -0.333       0.201
+gdp_pc      9.326e-05   1.78e-05      5.250      0.000    5.82e-05       0.000
+==============================================================================
+Omnibus:                      170.922   Durbin-Watson:                   1.894
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             4976.310
+Skew:                          -3.173   Prob(JB):                         0.00
+Kurtosis:                      27.393   Cond. No.                     1.09e+05
+==============================================================================
+
+Notes:
+[1] Standard Errors are heteroscedasticity robust (HC1)
+[2] The condition number is large, 1.09e+05. This might indicate that there are
+strong multicollinearity or other numerical problems.
+
+--- Reduced model (drop health_exp) with robust SE ---
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:        life_expectancy   R-squared:                       0.701
+Model:                            OLS   Adj. R-squared:                  0.698
+Method:                 Least Squares   F-statistic:                     94.57
+Date:                Sun, 15 Feb 2026   Prob (F-statistic):           5.10e-29
+Time:                        12:30:54   Log-Likelihood:                -544.19
+No. Observations:                 188   AIC:                             1094.
+Df Residuals:                     185   BIC:                             1104.
+Df Model:                           2                                         
+Covariance Type:                  HC1                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const         81.9554      1.353     60.553      0.000      79.285      84.626
+fertility     -4.3696      0.548     -7.968      0.000      -5.451      -3.288
+gdp_pc       9.26e-05   1.71e-05      5.428      0.000    5.89e-05       0.000
+==============================================================================
+Omnibus:                      174.393   Durbin-Watson:                   1.891
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             5307.607
+Skew:                          -3.258   Prob(JB):                         0.00
+Kurtosis:                      28.201   Cond. No.                     8.31e+04
+==============================================================================
+
+Notes:
+[1] Standard Errors are heteroscedasticity robust (HC1)
+[2] The condition number is large, 8.31e+04. This might indicate that there are
+strong multicollinearity or other numerical problems.
+
+--- Quadratic model with robust SE (Stata: robust) ---
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:        life_expectancy   R-squared:                       0.715
+Model:                            OLS   Adj. R-squared:                  0.711
+Method:                 Least Squares   F-statistic:                     159.7
+Date:                Sun, 15 Feb 2026   Prob (F-statistic):           1.85e-42
+Time:                        12:30:54   Log-Likelihood:                -594.83
+No. Observations:                 208   AIC:                             1198.
+Df Residuals:                     204   BIC:                             1211.
+Df Model:                           3                                         
+Covariance Type:                  HC1                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const         80.5285      1.475     54.604      0.000      77.621      83.436
+fertility     -4.0254      0.576     -6.990      0.000      -5.161      -2.890
+gdp_pc         0.0002   2.42e-05      6.248      0.000       0.000       0.000
+gdp_pc_2   -4.691e-10   1.43e-10     -3.284      0.001   -7.51e-10   -1.87e-10
+==============================================================================
+Omnibus:                      198.746   Durbin-Watson:                   1.814
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             7354.675
+Skew:                          -3.442   Prob(JB):                         0.00
+Kurtosis:                      31.306   Cond. No.                     1.28e+10
+==============================================================================
+
+Notes:
+[1] Standard Errors are heteroscedasticity robust (HC1)
+[2] The condition number is large, 1.28e+10. This might indicate that there are
+strong multicollinearity or other numerical problems.
+
+--- Marginal effect at mean(gdp_pc) (Stata: margins default) ---
+mean(gdp_pc) = 17811.40228144532
+ME = b2 + 2*b3*mean(gdp_pc) = 0.00013443165545908858
+
+--- Marginal effect significance (delta method) ---
+SE(ME) = 1.9642999675736704e-05
+t-stat = 6.843743709120983
+p-value = 8.843281662507252e-11
+df = 204
+
+--- Manual check (Stata display equivalent) ---
+0.00013443165545908858
+
+--- Interpretation at mean(gdp_pc) ---
+Effect of +1$ on life expectancy (years) = 0.00013443165545908858
+Effect of +1000$ on life expectancy (years) = 0.13443165545908858
+Effect of +1000$ in months ~ 1.613179865509063
+
+--- Final quadratic model (robust SE) ---
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:        life_expectancy   R-squared:                       0.715
+Model:                            OLS   Adj. R-squared:                  0.711
+Method:                 Least Squares   F-statistic:                     159.7
+Date:                Sun, 15 Feb 2026   Prob (F-statistic):           1.85e-42
+Time:                        12:30:54   Log-Likelihood:                -594.83
+No. Observations:                 208   AIC:                             1198.
+Df Residuals:                     204   BIC:                             1211.
+Df Model:                           3                                         
+Covariance Type:                  HC1                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const         80.5285      1.475     54.604      0.000      77.621      83.436
+fertility     -4.0254      0.576     -6.990      0.000      -5.161      -2.890
+gdp_pc         0.0002   2.42e-05      6.248      0.000       0.000       0.000
+gdp_pc_2   -4.691e-10   1.43e-10     -3.284      0.001   -7.51e-10   -1.87e-10
+==============================================================================
+Omnibus:                      198.746   Durbin-Watson:                   1.814
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             7354.675
+Skew:                          -3.442   Prob(JB):                         0.00
+Kurtosis:                      31.306   Cond. No.                     1.28e+10
+==============================================================================
+
+Notes:
+[1] Standard Errors are heteroscedasticity robust (HC1)
+[2] The condition number is large, 1.28e+10. This might indicate that there are
+strong multicollinearity or other numerical problems.
